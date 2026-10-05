@@ -1,17 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import AlertsFilters from "../components/AlertsFilters";
 import AlertsMap from "../components/AlertsMap";
 import { useAlertsStore } from "../store/alertsStore";
+import type { Arena, Priority } from "../types/alert";
+import { filterAlerts } from "../utils/filterAlerts";
 
 export default function HomePage() {
-    const alerts = useAlertsStore((state) => state.alerts);
+    const allAlerts = useAlertsStore((state) => state.alerts);
     const loading = useAlertsStore((state) => state.loading);
     const error = useAlertsStore((state) => state.error);
     const fetchAlerts = useAlertsStore((state) => state.fetchAlerts);
 
+    const [search, setSearch] = useState("");
+    const [arena, setArena] = useState<Arena | "">("");
+    const [priority, setPriority] = useState<Priority | "">("");
+
     useEffect(() => {
         fetchAlerts();
     }, [fetchAlerts]);
+
+    const alerts = useMemo(
+        () => filterAlerts(allAlerts, { search, arena, priority }),
+        [allAlerts, search, arena, priority],
+    );
 
     return (
         <div>
@@ -21,6 +33,15 @@ export default function HomePage() {
                 <Link to="/alerts/new">התראה חדשה</Link>
                 <Link to="/alerts">רשימת התראות</Link>
             </nav>
+
+            <AlertsFilters
+                search={search}
+                arena={arena}
+                priority={priority}
+                onSearchChange={setSearch}
+                onArenaChange={setArena}
+                onPriorityChange={setPriority}
+            />
 
             {loading && <p>טוען...</p>}
             {error && <p>{error}</p>}
