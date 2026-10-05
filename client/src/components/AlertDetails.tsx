@@ -4,16 +4,27 @@ import AlertsMap from "./AlertsMap";
 
 export function AlertDetails({ alert }: { alert: Alert }) {
     return (
-        <div>
-            <h1>{alert.displayName}</h1>
-            <p>תיאור: {alert.description}</p>
-            <p>סיווג: {alert.priority}</p>
-            <p>זירה: {alert.arena}</p>
-            <p>סטטוס: {alert.status}</p>
+        <div className="alert-details">
+            <div className="alert-details-card">
+                <h1>{alert.displayName}</h1>
+                <p>{alert.description}</p>
 
-            <Link to={`/alerts/${alert._id}/edit`}>עריכה</Link>
+                <div className="alert-details-tags">
+                    <span className="tag">{alert.priority}</span>
+                    <span className="tag">{alert.arena}</span>
+                    <span className="tag">{alert.status}</span>
+                </div>
 
-            <AlertsMap alerts={[{ ...alert, id: alert._id }]} height={400} />
+                <Link className="btn-links" to={`/alerts/${alert._id}/edit`}>
+                    עריכה
+                </Link>
+            </div>
+
+            <AlertsMap
+                className="alert-details-map"
+                alerts={[{ ...alert, id: alert._id }]}
+                height={450}
+            />
         </div>
     );
 }

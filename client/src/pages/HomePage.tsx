@@ -36,8 +36,12 @@ export default function HomePage() {
             <h1>עין צופיה</h1>
 
             <nav>
-                <Link to="/alerts/new">התראה חדשה</Link>
-                <Link to="/alerts">רשימת התראות</Link>
+                <Link className={"btn-links "} to="/alerts/new">
+                    התראה חדשה
+                </Link>
+                <Link className={"btn-links "} to="/alerts">
+                    רשימת התראות
+                </Link>
             </nav>
 
             <AlertsSummary alerts={alerts} />
@@ -63,4 +67,3 @@ export default function HomePage() {
         </div>
     );
 }
-

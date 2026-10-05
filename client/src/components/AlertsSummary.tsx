@@ -1,5 +1,9 @@
 import type { Alert } from "../types/alert";
-import { countActive, countByArena, countByPriority } from "../utils/alertStats";
+import {
+    countActive,
+    countByArena,
+    countByPriority,
+} from "../utils/alertStats";
 
 export default function AlertsSummary({ alerts }: { alerts: Alert[] }) {
     const byPriority = countByPriority(alerts);
@@ -7,18 +11,26 @@ export default function AlertsSummary({ alerts }: { alerts: Alert[] }) {
     const active = countActive(alerts);
 
     return (
-        <div>
-            <p>פעילות: {active}</p>
+        <div className="stats">
+            <div className="stat-card">
+                <span className="stat-label">פעילות</span>
+                <span className="stat-value">{active}</span>
+            </div>
 
-            <p>
-                נמוך: {byPriority.Low} | סביר: {byPriority.Medium} | גבוה:{" "}
-                {byPriority.High} | קריטי: {byPriority.Critical}
-            </p>
+            <div className="stat-card">
+                <span className="stat-label">נמוך | סביר | גבוה | קריטי</span>
+                <span className="stat-value">
+                    {byPriority.Low} | {byPriority.Medium} | {byPriority.High} |{" "}
+                    {byPriority.Critical}
+                </span>
+            </div>
 
-            <p>
-                צפון: {byArena.North} | מרכז: {byArena.Center} | דרום:{" "}
-                {byArena.South}
-            </p>
+            <div className="stat-card">
+                <span className="stat-label">צפון | מרכז | דרום</span>
+                <span className="stat-value">
+                    {byArena.North} | {byArena.Center} | {byArena.South}
+                </span>
+            </div>
         </div>
     );
 }

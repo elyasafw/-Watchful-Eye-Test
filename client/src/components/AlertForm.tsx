@@ -25,7 +25,7 @@ export default function AlertForm({ initialValues, onSubmit }: AlertFormProps) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="alert-form" onSubmit={handleSubmit}>
             <label>
                 שם
                 <input

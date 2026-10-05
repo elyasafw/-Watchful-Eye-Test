@@ -26,8 +26,8 @@ export default function AlertsFilters({
     }
 
     return (
-        <div>
-            <form onSubmit={handleSearchSubmit}>
+        <div className="alerts-filters">
+            <form className="search-form" onSubmit={handleSearchSubmit}>
                 <input
                     placeholder="חיפוש לפי שם"
                     value={searchInput}
