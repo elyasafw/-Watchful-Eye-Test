@@ -21,9 +21,17 @@ export function createService(repository) {
     }
 
     function update(id, updates) {
-        return repository.updateDoc(id, updates);
+        const finalUpdates = { ...updates };
+
+        if (finalUpdates.lon !== undefined) {
+            finalUpdates.lon = Number(finalUpdates.lon);
+        }
+        if (finalUpdates.lat !== undefined) {
+            finalUpdates.lat = Number(finalUpdates.lat);
+        }
+
+        return repository.updateDoc(id, finalUpdates);
     }
 
     return { createNew, getAll, getById, remove, update };
 }
-
