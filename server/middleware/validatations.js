@@ -1,6 +1,6 @@
-const PRIORITY_VALUES = ["נמוך", "סביר", "גבוה", "קריטי"];
-const ARENA_VALUES = ["צפון", "דרום", "מרכז"];
-const STATUS_VALUES = ["פעיל", "טופל"];
+const PRIORITY_VALUES = ["Low", "Medium", "High", "Critical"];
+const ARENA_VALUES = ["North", "South", "Center"];
+const STATUS_VALUES = ["Active", "Handled"];
 const ALERT_FIELDS = [
     "displayName",
     "description",
