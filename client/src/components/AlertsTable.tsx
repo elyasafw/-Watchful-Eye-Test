@@ -21,9 +21,11 @@ export default function AlertsTable({ alerts, onDelete }: AlertsTableProps) {
             <tbody>
                 {alerts.map((alert) => (
                     <tr key={alert._id}>
-                        <Link to={`/alerts/${alert._id}`}>
-                            <td>{alert.displayName}</td>
-                        </Link>
+                        <td>
+                            <Link to={`/alerts/${alert._id}`}>
+                                {alert.displayName}
+                            </Link>
+                        </td>
                         <td>{alert.priority}</td>
                         <td>{alert.arena}</td>
                         <td>{alert.status}</td>
