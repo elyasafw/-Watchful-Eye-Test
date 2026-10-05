@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Alert } from "../types/alert";
 import AlertsMap from "./AlertsMap";
 
@@ -9,6 +10,8 @@ export function AlertDetails({ alert }: { alert: Alert }) {
             <p>סיווג: {alert.priority}</p>
             <p>זירה: {alert.arena}</p>
             <p>סטטוס: {alert.status}</p>
+
+            <Link to={`/alerts/${alert._id}/edit`}>עריכה</Link>
 
             <AlertsMap alerts={[{ ...alert, id: alert._id }]} height={400} />
         </div>

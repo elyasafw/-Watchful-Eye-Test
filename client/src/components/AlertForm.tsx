@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import type { NewAlert } from "../types/alert";
 
 export interface AlertFormProps {
+    initialValues?: NewAlert;
     onSubmit: (alert: NewAlert) => void;
 }
 
@@ -15,8 +16,8 @@ const BASIC_ALERT: NewAlert = {
     lat: 0,
 };
 
-export default function AlertForm({ onSubmit }: AlertFormProps) {
-    const [alert, setAlert] = useState<NewAlert>(BASIC_ALERT);
+export default function AlertForm({ initialValues, onSubmit }: AlertFormProps) {
+    const [alert, setAlert] = useState<NewAlert>(initialValues ?? BASIC_ALERT);
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
