@@ -20,6 +20,10 @@ export function createService(repository) {
         return repository.deleteDoc(id);
     }
 
-    return { createNew, getAll, getById, remove };
+    function update(id, updates) {
+        return repository.updateDoc(id, updates);
+    }
+
+    return { createNew, getAll, getById, remove, update };
 }
 

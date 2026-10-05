@@ -4,6 +4,7 @@ import {
     deleteAlert,
     getAlertById,
     getAllAlerts,
+    updateAlert,
 } from "../controllers/alerts.controller.js";
 import { validateBody } from "../middleware/validatations.js";
 
@@ -29,6 +30,6 @@ alertsRouter.post(
 
 alertsRouter.delete("/:id", deleteAlert);
 
-alertsRouter.put("/:id", async (req, res) => {});
+alertsRouter.put("/:id", updateAlert);
 
 export default alertsRouter;
