@@ -41,6 +41,8 @@ export default function AlertsListPage() {
             {loading && <p>טוען...</p>}
             {error && <p>{error}</p>}
 
+            <p>סך הכל תוצאות: {alerts.length}</p>
+
             <AlertsTable alerts={alerts} onDelete={removeAlert} />
         </div>
     );

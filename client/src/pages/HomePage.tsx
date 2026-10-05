@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import AlertsFilters from "../components/AlertsFilters";
 import AlertsMap from "../components/AlertsMap";
+import AlertsSummary from "../components/AlertsSummary";
 import { useAlertsStore } from "../store/alertsStore";
 import type { Arena, Priority } from "../types/alert";
 import { filterAlerts } from "../utils/filterAlerts";
@@ -25,6 +26,11 @@ export default function HomePage() {
         [allAlerts, search, arena, priority],
     );
 
+    const mapAlerts = useMemo(
+        () => alerts.filter((alert) => alert.status !== "Handled"),
+        [alerts],
+    );
+
     return (
         <div>
             <h1>עין צופיה</h1>
@@ -33,6 +39,8 @@ export default function HomePage() {
                 <Link to="/alerts/new">התראה חדשה</Link>
                 <Link to="/alerts">רשימת התראות</Link>
             </nav>
+
+            <AlertsSummary alerts={alerts} />
 
             <AlertsFilters
                 search={search}
@@ -47,8 +55,12 @@ export default function HomePage() {
             {error && <p>{error}</p>}
 
             <AlertsMap
-                alerts={alerts.map((alert) => ({ ...alert, id: alert._id }))}
+                alerts={mapAlerts.map((alert) => ({
+                    ...alert,
+                    id: alert._id,
+                }))}
             />
         </div>
     );
 }
+
