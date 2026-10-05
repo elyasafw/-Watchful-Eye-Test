@@ -1,4 +1,5 @@
 export function errorHandler(err, req, res, next) {
+    console.log(`middleware error: ${err}`);
     if (err.status) {
         return res.status(err.status).json({ error: err.message });
     }

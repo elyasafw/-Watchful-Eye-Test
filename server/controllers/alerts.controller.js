@@ -17,3 +17,19 @@ export async function getAllAlerts(req, res) {
     res.json({ success: true, data: alerts });
 }
 
+export async function getAlertById(req, res) {
+    const alert = await alertsService.getById(req.params.id);
+
+    if (!alert) {
+        return res.status(404).json({ error: "התראה לא נמצאה" });
+    }
+
+    res.json({ success: true, data: alert });
+}
+
+export async function deleteAlert(req, res) {
+    await alertsService.remove(req.params.id);
+
+    res.json({ success: true, message: "התראה נמחקה בהצלחה" });
+}
+

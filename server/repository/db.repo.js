@@ -1,30 +1,30 @@
 import { ObjectId } from "mongodb";
 
-export function createRepository(collection) {
-    async function getAllAlerts() {
-        const allAlerts = await collection.find({}).toArray();
+export function createRepository(getCollection) {
+    async function getAllDocs() {
+        const allAlerts = await getCollection().find({}).toArray();
         return allAlerts;
     }
 
-    async function getAlertById(id) {
-        const alert = await collection.findOne({ _id: new ObjectId(id) });
+    async function getDocById(id) {
+        const alert = await getCollection().findOne({ _id: new ObjectId(id) });
         return alert;
     }
 
-    async function createAlert(alert) {
-        const result = await collection.insertOne(alert);
+    async function createDoc(doc) {
+        const result = await getCollection().insertOne(doc);
         return result.insertedId;
     }
 
-    async function deleteAlert(id) {
-        const result = await collection.deleteOne({
+    async function deleteDoc(id) {
+        const result = await getCollection().deleteOne({
             _id: new ObjectId(id),
         });
         return result._id;
     }
 
-    async function updateAlert(id, updates) {
-        const result = await collection.updateOne(
+    async function updateDoc(id, updates) {
+        const result = await getCollection().updateOne(
             { _id: new ObjectId(id) },
             { $set: updates },
         );
@@ -32,10 +32,10 @@ export function createRepository(collection) {
     }
 
     return {
-        getAllAlerts,
-        getAlertById,
-        createAlert,
-        deleteAlert,
-        updateAlert,
+        getAllDocs,
+        getDocById,
+        createDoc,
+        deleteDoc,
+        updateDoc,
     };
 }

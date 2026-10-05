@@ -1,15 +1,21 @@
 import { Router } from "express";
+import {
+    createNewAlert,
+    deleteAlert,
+    getAlertById,
+    getAllAlerts,
+} from "../controllers/alerts.controller.js";
 import { validateBody } from "../middleware/validatations.js";
 
 const alertsRouter = Router();
 
-alertsRouter.get("", async (req, res) => {});
+alertsRouter.get("", getAllAlerts);
 
-alertsRouter.get("/:id", async (req, res) => {});
+alertsRouter.get("/:id", getAlertById);
 
 alertsRouter.post(
     "",
-    validateBody([
+    validateBody(
         "displayName",
         "description",
         "priority",
@@ -17,11 +23,11 @@ alertsRouter.post(
         "status",
         "lon",
         "lat",
-    ]),
-    async (req, res) => {},
+    ),
+    createNewAlert,
 );
 
-alertsRouter.delete("/:id", async (req, res) => {});
+alertsRouter.delete("/:id", deleteAlert);
 
 alertsRouter.put("/:id", async (req, res) => {});
 
