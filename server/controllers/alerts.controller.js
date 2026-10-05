@@ -33,3 +33,13 @@ export async function deleteAlert(req, res) {
     res.json({ success: true, message: "התראה נמחקה בהצלחה" });
 }
 
+export async function updateAlert(req, res) {
+    const matchedes = await alertsService.update(req.params.id, req.body);
+
+    if (!matchedes) {
+        return res.status(404).json({ error: "התראה לא נמצאה" });
+    }
+
+    res.json({ success: true, message: "התראה עודכנה בהצלחה" });
+}
+
