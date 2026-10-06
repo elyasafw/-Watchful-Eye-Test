@@ -8,6 +8,25 @@ import {
     USER_FIELDS,
 } from "../../settings/schemas.js";
 
+export function validateLogin(req, res, next) {
+    const body = req.body ?? {};
+    const errors = [];
+
+    if (typeof body.username !== "string" || body.username.trim().length < 2) {
+        errors.push("שם משתמש - חובה, לפחות 2 תווים");
+    }
+
+    if (typeof body.password !== "string" || body.password.length < 8) {
+        errors.push("סיסמה - חובה, לפחות 8 תווים");
+    }
+
+    if (errors.length > 0) {
+        return res.status(400).json({ error: errors.join(" | ") });
+    }
+
+    next();
+}
+
 export function validateRegister(req, res, next) {
     const body = req.body ?? {};
     const errors = [];
@@ -46,7 +65,7 @@ export function validateRegister(req, res, next) {
     }
 
     if (errors.length > 0) {
-        return res.status(400).json({ error: errors.join(", ") });
+        return res.status(400).json({ error: errors.join(" | ") });
     }
 
     next();
@@ -104,7 +123,7 @@ export function validateCreateAlert(req, res, next) {
     }
 
     if (errors.length > 0) {
-        return res.status(400).json({ error: errors.join(", ") });
+        return res.status(400).json({ error: errors.join(" | ") });
     }
 
     next();
@@ -161,7 +180,7 @@ export function validateUpdateAlert(req, res, next) {
     }
 
     if (errors.length > 0) {
-        return res.status(400).json({ error: errors.join(", ") });
+        return res.status(400).json({ error: errors.join(" | ") });
     }
 
     next();

@@ -1,14 +1,7 @@
-import {
-    checkPassword,
-    createToken,
-    toPublicUser,
-    validateCredentils,
-} from "./authLogic.js";
+import { checkPassword, createToken, toPublicUser } from "./authLogic.js";
 
 export function createAuthService(usersService) {
     async function login(username, password) {
-        validateCredentils(username, password);
-
         const user = await usersService.getByUsername(username);
         const isValidUser = await checkPassword(user, password);
 

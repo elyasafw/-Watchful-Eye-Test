@@ -6,7 +6,7 @@ export function createUsersService(repository) {
         const newUser = {
             ...user,
             password: await bcrypt.hash(user.password, 10),
-            createdAt: new Date(),
+            createdAt: new Date().toLocaleDateString(),
         };
         return repository.createDoc(newUser);
     }
@@ -31,4 +31,3 @@ export function createUsersService(repository) {
 
     return { createNew, getAll, getById, getByUsername, remove };
 }
-
