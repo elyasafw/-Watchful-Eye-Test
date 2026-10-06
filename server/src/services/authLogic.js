@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../config.js";
+import { JWT_SECRET } from "../../settings/config.js";
 
 export function validateCredentils(username, password) {
     if (

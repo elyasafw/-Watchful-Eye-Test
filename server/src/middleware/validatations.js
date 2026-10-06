@@ -1,15 +1,56 @@
-const PRIORITY_VALUES = ["Low", "Medium", "High", "Critical"];
-const ARENA_VALUES = ["North", "South", "Center"];
-const STATUS_VALUES = ["Active", "Handled"];
-const ALERT_FIELDS = [
-    "displayName",
-    "description",
-    "priority",
-    "arena",
-    "status",
-    "lon",
-    "lat",
-];
+import {
+    ALERT_FIELDS,
+    ARENA_VALUES,
+    ASSIGNED_ARENA_VALUES,
+    PRIORITY_VALUES,
+    ROLE_VALUES,
+    STATUS_VALUES,
+    USER_FIELDS,
+} from "../../settings/schemas.js";
+
+export function validateRegister(req, res, next) {
+    const body = req.body ?? {};
+    const errors = [];
+
+    const unknownFields = Object.keys(body).filter(
+        (field) => !USER_FIELDS.includes(field),
+    );
+    if (unknownFields.length > 0) {
+        errors.push(`שדות לא מוכרים: ${unknownFields.join(", ")}`);
+    }
+
+    if (!body.username || String(body.username).trim().length < 2) {
+        errors.push("שם משתמש - חובה, לפחות 2 תווים");
+    }
+
+    if (!body.password || String(body.password).length < 8) {
+        errors.push("סיסמה - חובה, לפחות 8 תווים");
+    }
+
+    if (!body.email || String(body.email).trim() === "") {
+        errors.push("אימייל - שדה חובה");
+    }
+
+    if (!body.role) {
+        errors.push("תפקיד - שדה חובה");
+    } else if (!ROLE_VALUES.includes(body.role)) {
+        errors.push(`תפקיד - ערך לא חוקי, אפשרי: ${ROLE_VALUES.join(", ")}`);
+    }
+
+    if (!body.assignedArena) {
+        errors.push("זירה משויכת - שדה חובה");
+    } else if (!ASSIGNED_ARENA_VALUES.includes(body.assignedArena)) {
+        errors.push(
+            `זירה משויכת - ערך לא חוקי, אפשרי: ${ASSIGNED_ARENA_VALUES.join(", ")}`,
+        );
+    }
+
+    if (errors.length > 0) {
+        return res.status(400).json({ error: errors.join(", ") });
+    }
+
+    next();
+}
 
 export function validateCreateAlert(req, res, next) {
     const body = req.body ?? {};

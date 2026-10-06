@@ -1,5 +1,5 @@
+import { PORT } from "../settings/config.js";
 import { createApp } from "./app.js";
-import { PORT } from "./config.js";
 import { connectDB } from "./db.js";
 
 await connectDB();

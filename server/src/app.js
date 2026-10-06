@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import { errorHandler } from "./middleware/errors.js";
 import alertsRouter from "./routes/alerts.route.js";
+import authRouter from "./routes/auth.route.js";
 
 export function createApp() {
     const app = express();
@@ -13,6 +14,7 @@ export function createApp() {
     });
 
     app.use("/api/alerts", alertsRouter);
+    app.use("/api/auth", authRouter);
 
     app.use(errorHandler);
 
