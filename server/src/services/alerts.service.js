@@ -4,6 +4,7 @@ export function createAlertsService(repository) {
             ...alert,
             lon: Number(alert.lon),
             lat: Number(alert.lat),
+            createdAt: Date.now(),
         };
         return repository.createDoc(newAlert);
     }

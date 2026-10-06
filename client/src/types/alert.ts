@@ -11,7 +11,8 @@ export interface Alert {
     status: Status;
     lon: number;
     lat: number;
+    createdAt: number;
 }
 
-export type NewAlert = Omit<Alert, "_id">;
+export type NewAlert = Omit<Alert, "_id" | "createdAt">;
 export type UpdateAlert = Partial<NewAlert>;
