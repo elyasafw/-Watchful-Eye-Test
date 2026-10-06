@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Layout from "../layouts/Layout";
 import AlertDetailPage from "../pages/AlertDetailPage";
 import AlertsListPage from "../pages/AlertsListPage";
 import EditAlertPage from "../pages/EditAlertPage";
@@ -11,46 +12,19 @@ export default function AppRoutes() {
     return (
         <Routes>
             <Route path="/login" element={<LoginPage />} />
-            <Route
-                path="/"
-                element={
-                    <ProtectedRoute>
-                        <HomePage />
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/alerts"
-                element={
-                    <ProtectedRoute>
-                        <AlertsListPage />
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/alerts/new"
-                element={
-                    <ProtectedRoute>
-                        <NewAlertPage />
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/alerts/:id"
-                element={
-                    <ProtectedRoute>
-                        <AlertDetailPage />
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/alerts/:id/edit"
-                element={
-                    <ProtectedRoute>
-                        <EditAlertPage />
-                    </ProtectedRoute>
-                }
-            />
+
+            <Route element={<ProtectedRoute />}>
+                <Route element={<Layout />}>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/alerts" element={<AlertsListPage />} />
+                    <Route path="/alerts/new" element={<NewAlertPage />} />
+                    <Route path="/alerts/:id" element={<AlertDetailPage />} />
+                    <Route
+                        path="/alerts/:id/edit"
+                        element={<EditAlertPage />}
+                    />
+                </Route>
+            </Route>
         </Routes>
     );
 }

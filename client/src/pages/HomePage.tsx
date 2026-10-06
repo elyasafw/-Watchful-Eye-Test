@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import AlertsFilters from "../components/AlertsFilters";
 import AlertsMap from "../components/AlertsMap";
 import AlertsSummary from "../components/AlertsSummary";
@@ -34,15 +33,6 @@ export default function HomePage() {
     return (
         <div>
             <h1>עין צופיה</h1>
-
-            <nav>
-                <Link className={"btn-links "} to="/alerts/new">
-                    התראה חדשה
-                </Link>
-                <Link className={"btn-links "} to="/alerts">
-                    רשימת התראות
-                </Link>
-            </nav>
 
             <AlertsSummary alerts={alerts} />
 
