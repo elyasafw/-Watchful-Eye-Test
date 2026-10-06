@@ -14,6 +14,13 @@ export async function createNewAlert(req, res) {
 export async function getAllAlerts(req, res) {
     const alerts = await alertsService.getAll();
 
+    if (req.user.role === "arena_user") {
+        const ownAlerts = alerts.filter(
+            (alert) => alert.arena === req.user.assignedArena,
+        );
+        return res.json({ success: true, data: ownAlerts });
+    }
+
     res.json({ success: true, data: alerts });
 }
 
@@ -22,6 +29,15 @@ export async function getAlertById(req, res) {
 
     if (!alert) {
         return res.status(404).json({ error: "התראה לא נמצאה" });
+    }
+
+    if (
+        req.user.role === "arena_user" &&
+        alert.arena !== req.user.assignedArena
+    ) {
+        return res
+            .status(403)
+            .json({ error: "אין הרשאה לצפות בהתראה מזירה אחרת" });
     }
 
     res.json({ success: true, data: alert });

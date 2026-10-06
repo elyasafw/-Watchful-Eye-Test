@@ -6,12 +6,15 @@ import {
     getAllAlerts,
     updateAlert,
 } from "../controllers/alerts.controller.js";
+import { authMiddleware } from "../middleware/auth.js";
 import {
     validateCreateAlert,
     validateUpdateAlert,
 } from "../middleware/validatations.js";
 
 const alertsRouter = Router();
+
+alertsRouter.use(authMiddleware);
 
 alertsRouter.get("", getAllAlerts);
 
