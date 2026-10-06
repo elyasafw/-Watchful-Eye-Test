@@ -44,9 +44,10 @@ export default function AdminUsersPage() {
         <div>
             <h1>ניהול משתמשים</h1>
 
-            <UsersTable users={users} onDelete={handleDelete} />
-
-            <UserForm onSubmit={handleCreate} error={error} />
+            <div className="admin-users-page">
+                <UsersTable users={users} onDelete={handleDelete} />
+                <UserForm onSubmit={handleCreate} error={error} />
+            </div>
         </div>
     );
 }

@@ -37,7 +37,9 @@ export default function HomePage() {
         <div>
             <h1>עין צופיה</h1>
 
-            {threatDetected && <p>התראת התקפה רב זירתית</p>}
+            {threatDetected && (
+                <p className="threat-warning">התראת התקפה רב זירתית</p>
+            )}
 
             <AlertsSummary alerts={alerts} />
 
@@ -54,6 +56,7 @@ export default function HomePage() {
             {error && <p>{error}</p>}
 
             <AlertsMap
+                className="home-map"
                 alerts={mapAlerts.map((alert) => ({
                     ...alert,
                     id: alert._id,

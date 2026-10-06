@@ -33,7 +33,18 @@ export default function EditAlertPage() {
     return (
         <div>
             <h1>עריכת התראה</h1>
-            <AlertForm initialValues={alert} onSubmit={handleSubmit} />
+            <AlertForm
+                initialValues={{
+                    displayName: alert.displayName,
+                    description: alert.description,
+                    priority: alert.priority,
+                    arena: alert.arena,
+                    status: alert.status,
+                    lon: alert.lon,
+                    lat: alert.lat,
+                }}
+                onSubmit={handleSubmit}
+            />
         </div>
     );
 }

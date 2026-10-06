@@ -24,9 +24,31 @@ h1 {
 
 nav {
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 16px;
+    background: white;
+    padding: 20px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.navbar-user {
+    margin-right: auto;
+    background: #e5eafb;
+    color: #626271;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.btn-logout {
+    background: #dc2626e2;
+}
+
+.btn-logout:hover {
+    background: #b91c1ce1;
 }
 
 .btn-links {
@@ -59,7 +81,6 @@ nav {
     background: white;
     padding: 14px 20px;
     border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .stat-value {
@@ -68,7 +89,7 @@ nav {
 }
 
 .stat-label {
-    font-size: 13px;
+    font-size: 15px;
     color: #6b7280;
 }
 
@@ -98,6 +119,11 @@ tr:last-child td {
 
 a {
     color: #2563eb;
+    text-decoration: none;
+}
+
+a:active {
+    border-bottom: 1px solid;
 }
 
 .alerts-filters {
@@ -135,13 +161,12 @@ a {
 
 .alert-details {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+    align-items: flex-start;
+    gap: 24px;
 }
 
 .alert-details-card {
-    width: 100%;
+    flex: 1;
     max-width: 480px;
     background: white;
     padding: 20px;
@@ -172,9 +197,45 @@ a {
 }
 
 .alert-details-map {
-    width: 100%;
-    height: 100%;
+    flex: 1;
     border-radius: 8px;
+    overflow: hidden;
+}
+
+.home-map {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.threat-warning {
+    background: #da3535;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.admin-users-page {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.admin-users-page table {
+    flex: 1 1 80%;
+    width: auto;
+}
+
+.admin-users-page .user-form {
+    flex: 1 1 40%;
+}
+
+.admin-users-page .alert-form {
+    max-width: none;
 }
 
 input,
@@ -184,15 +245,23 @@ textarea {
     border: 1px solid #d0d5dd;
     border-radius: 6px;
     font-size: 15px;
-}
-
-input {
-    width: 200px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
 }
 
 textarea {
     resize: vertical;
     min-height: 70px;
+}
+
+.search-form input {
+    width: auto;
+    flex: 1;
+}
+
+.alerts-filters select {
+    width: auto;
 }
 
 button {

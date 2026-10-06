@@ -23,7 +23,7 @@ export function UserForm({ onSubmit, error }: UserFormProps) {
     }
 
     return (
-        <div>
+        <div className="user-form">
             <h2>משתמש חדש</h2>
 
             <form className="alert-form" onSubmit={handleSubmit}>

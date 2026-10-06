@@ -5,7 +5,7 @@ function getRoleLabel(role: string) {
     if (role === "arena_user") return "חייל זירתי";
     if (role === "general_user") return "חייל כללי";
     if (role === "admin") return "מנהל מערכת";
-    console.log("hi")
+    console.log("hi");
     return role;
 }
 
@@ -30,11 +30,13 @@ export default function Navbar() {
                 <Link to="/admin/users">ניהול משתמשים</Link>
             )}
 
-            <span>
+            <span className="navbar-user">
                 {user.username} ({getRoleLabel(user.role)})
             </span>
 
-            <button onClick={handleLogout}>יציאה</button>
+            <button className="btn-logout" onClick={handleLogout}>
+                יציאה
+            </button>
         </nav>
     );
 }
