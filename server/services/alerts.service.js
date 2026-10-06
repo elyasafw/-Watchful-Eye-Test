@@ -1,4 +1,4 @@
-export function createService(repository) {
+export function createAlertsService(repository) {
     function createNew(alert) {
         const newAlert = {
             ...alert,

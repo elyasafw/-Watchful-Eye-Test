@@ -1,9 +1,9 @@
 import { alertsCol } from "../db.js";
 import { createRepository } from "../repository/db.repo.js";
-import { createService } from "../services/alerts.service.js";
+import { createAlertsService } from "../services/alerts.service.js";
 
-const repository = createRepository(alertsCol);
-const alertsService = createService(repository);
+const alertsRepository = createRepository(alertsCol);
+const alertsService = createAlertsService(alertsRepository);
 
 export async function createNewAlert(req, res) {
     const result = await alertsService.createNew(req.body);
@@ -42,4 +42,3 @@ export async function updateAlert(req, res) {
 
     res.json({ success: true, message: "התראה עודכנה בהצלחה" });
 }
-

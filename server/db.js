@@ -13,3 +13,4 @@ export async function connectDB() {
 }
 
 export const alertsCol = () => db.collection("alerts");
+export const usersCol = () => db.collection("users");

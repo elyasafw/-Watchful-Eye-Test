@@ -2,13 +2,18 @@ import { ObjectId } from "mongodb";
 
 export function createRepository(getCollection) {
     async function getAllDocs() {
-        const allAlerts = await getCollection().find({}).toArray();
-        return allAlerts;
+        const allDocs = await getCollection().find({}).toArray();
+        return allDocs;
     }
 
     async function getDocById(id) {
-        const alert = await getCollection().findOne({ _id: new ObjectId(id) });
-        return alert;
+        const doc = await getCollection().findOne({ _id: new ObjectId(id) });
+        return doc;
+    }
+
+    async function getDocByField(field, value) {
+        const doc = await getCollection().findOne({ [field]: value });
+        return doc;
     }
 
     async function createDoc(doc) {
@@ -34,6 +39,7 @@ export function createRepository(getCollection) {
     return {
         getAllDocs,
         getDocById,
+        getDocByField,
         createDoc,
         deleteDoc,
         updateDoc,
