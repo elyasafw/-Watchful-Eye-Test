@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
     deleteUser,
+    getAllUsers,
     getMe,
     login,
     register,
@@ -24,6 +25,8 @@ authRouter.post(
     validateRegister,
     register,
 );
+
+authRouter.get("/users", authMiddleware, requireRole("admin"), getAllUsers);
 
 authRouter.delete(
     "/users/:id",

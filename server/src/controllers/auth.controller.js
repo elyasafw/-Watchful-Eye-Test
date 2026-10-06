@@ -30,6 +30,12 @@ export async function getMe(req, res) {
     res.json({ success: true, data: user });
 }
 
+export async function getAllUsers(req, res) {
+    const users = await usersService.getAll();
+
+    res.json({ success: true, data: users });
+}
+
 export async function deleteUser(req, res) {
     await usersService.remove(req.params.id);
 
