@@ -29,3 +29,9 @@ export async function getMe(req, res) {
 
     res.json({ success: true, data: user });
 }
+
+export async function deleteUser(req, res) {
+    await usersService.remove(req.params.id);
+
+    res.json({ success: true, message: "משתמש נמחק בהצלחה" });
+}

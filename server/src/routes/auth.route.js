@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { getMe, login, register } from "../controllers/auth.controller.js";
+import {
+    deleteUser,
+    getMe,
+    login,
+    register,
+} from "../controllers/auth.controller.js";
 import { authMiddleware, requireRole } from "../middleware/auth.js";
 import {
     validateLogin,
@@ -18,6 +23,13 @@ authRouter.post(
     requireRole("admin"),
     validateRegister,
     register,
+);
+
+authRouter.delete(
+    "/users/:id",
+    authMiddleware,
+    requireRole("admin"),
+    deleteUser,
 );
 
 export default authRouter;
