@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "../layouts/Layout";
+import AdminUsersPage from "../pages/AdminUsersPage";
 import AlertDetailPage from "../pages/AlertDetailPage";
 import AlertsListPage from "../pages/AlertsListPage";
 import EditAlertPage from "../pages/EditAlertPage";
@@ -23,6 +24,7 @@ export default function AppRoutes() {
                         path="/alerts/:id/edit"
                         element={<EditAlertPage />}
                     />
+                    <Route path="/admin/users" element={<AdminUsersPage />} />
                 </Route>
             </Route>
         </Routes>
