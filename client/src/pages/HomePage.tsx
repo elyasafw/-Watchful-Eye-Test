@@ -4,6 +4,7 @@ import AlertsMap from "../components/AlertsMap";
 import AlertsSummary from "../components/AlertsSummary";
 import { useAlertsStore } from "../store/alertsStore";
 import type { Arena, Priority } from "../types/alert";
+import { detectThreat } from "../utils/detectThreat";
 import { filterAlerts } from "../utils/filterAlerts";
 
 export default function HomePage() {
@@ -30,9 +31,13 @@ export default function HomePage() {
         [alerts],
     );
 
+    const threatDetected = useMemo(() => detectThreat(allAlerts), [allAlerts]);
+
     return (
         <div>
             <h1>עין צופיה</h1>
+
+            {threatDetected && <p>התראת התקפה רב זירתית</p>}
 
             <AlertsSummary alerts={alerts} />
 
