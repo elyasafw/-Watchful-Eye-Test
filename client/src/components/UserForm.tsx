@@ -75,12 +75,18 @@ export function UserForm({ onSubmit, error }: UserFormProps) {
                     תפקיד
                     <select
                         value={newUser.role}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                            const role = e.target.value as NewUser["role"];
+                            const isArenaRestricted = role === "arena_user";
+
                             setNewUser({
                                 ...newUser,
-                                role: e.target.value as NewUser["role"],
-                            })
-                        }
+                                role,
+                                assignedArena: isArenaRestricted
+                                    ? "North"
+                                    : "All",
+                            });
+                        }}
                     >
                         <option value="arena_user">חייל זירתי</option>
                         <option value="general_user">חייל כללי</option>

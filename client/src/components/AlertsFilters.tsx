@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { useAuthStore } from "../store/authStore";
 import type { Arena, Priority } from "../types/alert";
 
 export interface AlertsFiltersProps {
@@ -19,6 +20,8 @@ export default function AlertsFilters({
     onPriorityChange,
 }: AlertsFiltersProps) {
     const [searchInput, setSearchInput] = useState(search);
+    const user = useAuthStore((state) => state.user);
+    const isArenaUser = user?.role === "arena_user";
 
     function handleSearchSubmit(e: FormEvent) {
         e.preventDefault();
@@ -36,15 +39,19 @@ export default function AlertsFilters({
                 <button type="submit">חיפוש</button>
             </form>
 
-            <select
-                value={arena}
-                onChange={(e) => onArenaChange(e.target.value as Arena | "")}
-            >
-                <option value="">כל הזירות</option>
-                <option value="North">צפון</option>
-                <option value="South">דרום</option>
-                <option value="Center">מרכז</option>
-            </select>
+            {!isArenaUser && (
+                <select
+                    value={arena}
+                    onChange={(e) =>
+                        onArenaChange(e.target.value as Arena | "")
+                    }
+                >
+                    <option value="">כל הזירות</option>
+                    <option value="North">צפון</option>
+                    <option value="South">דרום</option>
+                    <option value="Center">מרכז</option>
+                </select>
+            )}
 
             <select
                 value={priority}

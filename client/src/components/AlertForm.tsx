@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
-import type { NewAlert } from "../types/alert";
+import { useAuthStore } from "../store/authStore";
+import type { Arena, NewAlert } from "../types/alert";
 
 export interface AlertFormProps {
     initialValues?: NewAlert;
@@ -17,7 +18,15 @@ const BASIC_ALERT: NewAlert = {
 };
 
 export default function AlertForm({ initialValues, onSubmit }: AlertFormProps) {
-    const [alert, setAlert] = useState<NewAlert>(initialValues ?? BASIC_ALERT);
+    const user = useAuthStore((state) => state.user);
+    const isArenaUser = user?.role === "arena_user";
+
+    const [alert, setAlert] = useState<NewAlert>(
+        initialValues ??
+            (isArenaUser
+                ? { ...BASIC_ALERT, arena: user.assignedArena as Arena }
+                : BASIC_ALERT),
+    );
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
@@ -66,22 +75,24 @@ export default function AlertForm({ initialValues, onSubmit }: AlertFormProps) {
                 </select>
             </label>
 
-            <label>
-                זירה
-                <select
-                    value={alert.arena}
-                    onChange={(e) =>
-                        setAlert({
-                            ...alert,
-                            arena: e.target.value as NewAlert["arena"],
-                        })
-                    }
-                >
-                    <option value="North">צפון</option>
-                    <option value="South">דרום</option>
-                    <option value="Center">מרכז</option>
-                </select>
-            </label>
+            {!isArenaUser && (
+                <label>
+                    זירה
+                    <select
+                        value={alert.arena}
+                        onChange={(e) =>
+                            setAlert({
+                                ...alert,
+                                arena: e.target.value as NewAlert["arena"],
+                            })
+                        }
+                    >
+                        <option value="North">צפון</option>
+                        <option value="South">דרום</option>
+                        <option value="Center">מרכז</option>
+                    </select>
+                </label>
+            )}
 
             <label>
                 סטטוס
